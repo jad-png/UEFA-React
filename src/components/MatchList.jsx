@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useMatchStore } from "../stores/matchStore";
 
 export function MatchList() {
-  const { matches, loading, error, fetchedMatches } = useMatchStore();
+  const { matches, loading, error, fetchMatches } = useMatchStore();
   const [currentPage, setCurrentPage] = useState(1);
 
   const matchesPerPage = 2;
 
   useEffect(() => {
-    fetchedMatches();
-  }, [fetchedMatches]);
+    fetchMatches();
+  }, [fetchMatches]);
 
   if (loading)
     return <div className="text-center text-gray-500">Chargement...</div>;
@@ -27,32 +27,32 @@ export function MatchList() {
         Quarts de Finale - Ligue des Champions 2024/2025
       </h1>
       <div className="grid gap-4">
-        {currentMatches.map((match) => (
+      {currentMatches.map((match) => (
           <div
-            key={match}
+            key={match.id}
             className="bg-white shadow-md rounded-lg p-4 flex items-center justify-between"
           >
             <div className="flex items-center space-x-4">
               <img
-                src={match.}
-                alt={match.}
+                src={match.teams.home.logo}
+                alt={match.teams.home.name}
                 className="w-12 h-12"
               />
-              <span className="font-semibold">{match.}</span>
-              <span className="text-lg font-bold">{match.}</span>
+              <span className="font-semibold">{match.teams.home.name}</span>
+              <span className="text-lg font-bold">{match.goals.home}</span>
             </div>
             <span className="text-gray-500">vs</span>
             <div className="flex items-center space-x-4">
-              <span className="text-lg font-bold">{match.}</span>
-              <span className="font-semibold">{match.}</span>
+              <span className="text-lg font-bold">{match.goals.away}</span>
+              <span className="font-semibold">{match.teams.away.name}</span>
               <img
-                src={match.}
-                alt={match.}
+                src={match.teams.away.logo}
+                alt={match.teams.away.name}
                 className="w-12 h-12"
               />
             </div>
             <Link
-              to={`/match/${match.}`}
+              to={`/match/${match.id}`}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             >
               Détails
