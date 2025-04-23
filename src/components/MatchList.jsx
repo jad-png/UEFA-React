@@ -15,4 +15,11 @@ export function MatchList() {
     return <div className="text-center text-gray-500">Chargement...</div>;
   if (error)
     return <div className="text-center text-red-500">Erreur : {error}</div>;
+
+  const indexOfLastMatch = currentPage * matchesPerPage;
+  const indexOfFirstMatch = indexOfLastMatch - matchesPerPage;
+  const currentMatches = matches.slice(indexOfFirstMatch, indexOfLastMatch);
+  const totalPages = Math.ceil(matches.length / matchesPerPage);
+
+  
 }
