@@ -15,3 +15,5 @@ const useMatchStore = create((set) => ({
     }
   },
 }));
+
+export default useMatchStore;
